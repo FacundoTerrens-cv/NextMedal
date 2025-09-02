@@ -46,8 +46,12 @@ import pricingComparison from './modules/pricing-comparison';
 import pricingList from './modules/pricing-list';
 import productComparison from './modules/productComparison';
 import richtextModule from './modules/richtext-module';
+import servicesSection from './modules/services-section';
 import tabbedContent from './modules/tabbed-content';
 import videoHero from './modules/video-hero';
+import whyChooseUs from './modules/why-choose-us';
+import partnersSection from './modules/partners-section';
+import ctaSection from './modules/cta-section';
 
 export const schemaTypes: SchemaTypeDefinition[] = [
   // documents
@@ -94,6 +98,10 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   pricingList,
   productComparison,
   richtextModule,
+  servicesSection,
   tabbedContent,
   videoHero,
+  whyChooseUs,
+  partnersSection,
+  ctaSection,
 ];

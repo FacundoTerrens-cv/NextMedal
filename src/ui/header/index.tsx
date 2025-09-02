@@ -1,83 +1,130 @@
-import { cn } from '@/lib/utils';
-import { getSite } from '@/sanity/lib/fetch';
-import CTAList from '@/ui/CTAList';
-import { Img } from '@/ui/Img';
+'use client';
+
+import { Globe, Search, User, Menu } from 'lucide-react';
 import Link from 'next/link';
-import ThemeToggleWrapper from './ThemeToggleWrapper';
-import Toggle from './Toggle';
-import Wrapper from './Wrapper';
-import MobileNavigation from './mobile-navigation';
-import Navigation from './navigation';
+import { useState } from 'react';
 
-export default async function Header() {
-  const { title, logo, ctas, headerMenu } = await getSite();
-
-  const logoImageDark = logo?.image?.dark || logo?.image?.default || logo?.image?.light;
-  const logoImageLight = logo?.image?.light || logo?.image?.default || logo?.image?.dark;
+export default function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <>
-      <Wrapper
-        className="bg-background max-lg:header-open:shadow-lg sticky top-0 z-50"
-        role="banner"
-        aria-label="Site header"
-      >
-        <div className="header-grid mx-auto grid max-w-screen-xl items-center gap-x-6 p-4">
-          <div className="[grid-area:logo]">
-            <Link
-              className={cn('h4 lg:h3 inline-block', logo?.image && 'max-w-3xs')}
-              href="/"
-              aria-label={`Return to ${title} homepage`}
-            >
-              <>
-                {logoImageDark ? (
-                  <Img
-                    className="hidden dark:inline-block max-h-[1.2em] w-auto filter brightness-150 drop-shadow-md"
-                    image={logoImageDark}
-                    alt={`${logo?.name || title} logo - dark version`}
-                  />
-                ) : (
-                  <span className="hidden dark:inline-block">{title}</span>
-                )}
-                {logoImageLight ? (
-                  <Img
-                    className="inline-block dark:hidden max-h-[1.2em] w-auto filter brightness-150 drop-shadow-md"
-                    image={logoImageLight}
-                    alt={`${logo?.name || title} logo - light version`}
-                  />
-                ) : (
-                  <span className="inline-block dark:hidden">{title}</span>
-                )}
-              </>
+    <header className="bg-white border-b border-gray-100 sticky top-0 z-50">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          
+          {/* Left Section: Logo and Brand Name */}
+          <div className="flex items-center gap-3">
+            {/* 3D Logo */}
+            <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-700 rounded-lg flex items-center justify-center shadow-lg transform rotate-12">
+              <div className="w-5 h-5 bg-white rounded-sm transform -rotate-12"></div>
+            </div>
+            <Link href="/" className="text-xl font-bold text-gray-900 font-serif">
+              Tech Norway
             </Link>
           </div>
 
-          <nav className="max-lg:hidden" aria-label="Main navigation">
-            <Navigation />
+          {/* Middle Section: Navigation Links */}
+          <nav className="hidden md:flex items-center space-x-8">
+            <Link 
+              href="/tjenester" 
+              className="text-gray-700 hover:text-purple-600 transition-colors duration-200 font-medium"
+            >
+              Tjenester
+            </Link>
+            <Link 
+              href="/prosjekter" 
+              className="text-gray-700 hover:text-purple-600 transition-colors duration-200 font-medium"
+            >
+              Prosjekter
+            </Link>
+            <Link 
+              href="/om-oss" 
+              className="text-gray-700 hover:text-purple-600 transition-colors duration-200 font-medium"
+            >
+              Om oss
+            </Link>
           </nav>
 
-          <div
-            className="max-lg:hidden [grid-area:ctas] max-lg:*:w-full lg:ml-4"
-            aria-label="Call to action buttons"
-          >
-            <CTAList ctas={ctas} />
-          </div>
-
-          <div
-            className="flex items-center gap-2 ml-auto [grid-area:toggle-area]"
-            aria-label="Theme and menu controls"
-          >
-            <div className="lg:block">
-              <ThemeToggleWrapper />
+          {/* Right Section: Utility Icons and Links */}
+          <div className="flex items-center space-x-6">
+            {/* Language Selector */}
+            <div className="hidden sm:flex items-center gap-2 text-gray-700 hover:text-purple-600 transition-colors duration-200 cursor-pointer">
+              <Globe className="w-4 h-4" />
+              <span className="text-sm font-medium">EN</span>
             </div>
-            <Toggle />
+
+            {/* User Account */}
+            <div className="hidden sm:flex items-center gap-2 text-gray-700 hover:text-purple-600 transition-colors duration-200 cursor-pointer">
+              <User className="w-4 h-4" />
+              <span className="text-sm font-medium">Min side</span>
+            </div>
+
+            {/* Search */}
+            <div className="hidden sm:flex items-center gap-2 text-gray-700 hover:text-purple-600 transition-colors duration-200 cursor-pointer">
+              <Search className="w-4 h-4" />
+              <span className="text-sm font-medium">Søk</span>
+            </div>
+
+            {/* Avatar/Profile Menu */}
+            <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-300 transition-colors duration-200">
+              <User className="w-4 h-4 text-gray-600" />
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="md:hidden p-2 text-gray-700 hover:text-purple-600 transition-colors duration-200"
+            >
+              <Menu className="w-5 h-5" />
+            </button>
           </div>
         </div>
-      </Wrapper>
 
-      <div className="lg:hidden header-closed:hidden" aria-label="Mobile navigation menu">
-        <MobileNavigation menu={{ items: headerMenu?.items }} ctas={ctas} />
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden border-t border-gray-100 py-4">
+            <nav className="flex flex-col space-y-4">
+              <Link 
+                href="/tjenester" 
+                className="text-gray-700 hover:text-purple-600 transition-colors duration-200 font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Tjenester
+              </Link>
+              <Link 
+                href="/prosjekter" 
+                className="text-gray-700 hover:text-purple-600 transition-colors duration-200 font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Prosjekter
+              </Link>
+              <Link 
+                href="/om-oss" 
+                className="text-gray-700 hover:text-purple-600 transition-colors duration-200 font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Om oss
+              </Link>
+              
+              {/* Mobile Utility Links */}
+              <div className="pt-4 border-t border-gray-100 space-y-3">
+                <div className="flex items-center gap-2 text-gray-700">
+                  <Globe className="w-4 h-4" />
+                  <span className="text-sm font-medium">EN</span>
+                </div>
+                <div className="flex items-center gap-2 text-gray-700">
+                  <User className="w-4 h-4" />
+                  <span className="text-sm font-medium">Min side</span>
+                </div>
+                <div className="flex items-center gap-2 text-gray-700">
+                  <Search className="w-4 h-4" />
+                  <span className="text-sm font-medium">Søk</span>
+                </div>
+              </div>
+            </nav>
+          </div>
+        )}
       </div>
-    </>
+    </header>
   );
 }

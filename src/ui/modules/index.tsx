@@ -10,6 +10,11 @@ import PersonList from './PersonList';
 import PricingList from './PricingList';
 import ProductComparison from './ProductComparison';
 import RichtextModule from './RichtextModule';
+import ServicesSection from './ServicesSection';
+import WhyChooseUs from './WhyChooseUs';
+import PartnersSection from './PartnersSection';
+import CTASection from './CTASection';
+import TestimonialSlider from './TestimonialSlider';
 import VideoHero from './VideoHero';
 import BlogFrontpage from './blog/BlogFrontpage';
 import BlogList from './blog/BlogList';
@@ -87,6 +92,18 @@ export default function Modules({
 
           case 'richtext-module':
             return <RichtextModule {...module} key={module._key} isTabbedModule={isTabbedModule} />;
+
+          case 'services-section':
+            return <ServicesSection {...module} key={module._key} />;
+
+          case 'why-choose-us':
+            return <WhyChooseUs {...module} key={module._key} />;
+
+          case 'partners-section':
+            return <PartnersSection {...module} key={module._key} />;
+
+          case 'cta-section':
+            return <CTASection {...module} key={module._key} />;
 
           case 'tabbedContent':
             return (

@@ -18,6 +18,10 @@ export default defineField({
     { type: 'person-list' },
     { type: 'pricing-list' },
     { type: 'product-comparison' },
+    { type: 'services-section' },
+    { type: 'why-choose-us' },
+    { type: 'partners-section' },
+    { type: 'cta-section' },
     { type: 'blog-frontpage' },
     { type: 'blog-list' },
     { type: 'blog-post-content' },
@@ -39,11 +43,11 @@ export default defineField({
         },
         {
           name: 'Content Blocks',
-          of: ['richtext-module', 'callout', 'tabbedContent', 'accordion-list'],
+          of: ['richtext-module', 'callout', 'tabbedContent', 'accordion-list', 'cta-section'],
         },
         {
           name: 'Feature Displays',
-          of: ['feature-grid', 'logo-list', 'person-list', 'pricing-list', 'product-comparison'],
+          of: ['feature-grid', 'logo-list', 'person-list', 'pricing-list', 'product-comparison', 'services-section', 'why-choose-us', 'partners-section'],
         },
         {
           name: 'Blog',

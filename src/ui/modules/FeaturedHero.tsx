@@ -45,27 +45,49 @@ export default function FeaturedHero({
     );
   };
   return (
-    <section className={cn(!isTabbedModule && 'py-24 sm:py-32', className)}>
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+         <section className={cn(
+       !isTabbedModule && 'py-32 sm:py-40 lg:py-48 relative overflow-hidden',
+       className
+     )}>
+      {/* Background with mountain peaks effect */}
+      <div className="absolute inset-0 bg-gradient-to-b from-purple-50 via-white to-white">
+        <div 
+          className="absolute inset-0 opacity-20"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='1000' height='400' viewBox='0 0 1000 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,400 L200,300 L400,350 L600,250 L800,300 L1000,200 L1000,400 Z' fill='%23e5e7eb'/%3E%3C/svg%3E")`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center bottom',
+            backgroundRepeat: 'no-repeat'
+          }}
+        />
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+                 <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-12 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-center">
           <div
             className={cn(
               'lg:pt-4',
               isRightDirection ? 'lg:mr-auto lg:pr-4' : 'lg:ml-auto lg:pl-4'
             )}
           >
-            <div
-              className={cn(
-                'lg:max-w-lg mb-10',
-                stegaClean(textAlign) === 'center' && 'text-center',
-                stegaClean(textAlign) === 'right' && 'text-right'
-              )}
-            >
+                         <div
+               className={cn(
+                 'lg:max-w-2xl mb-10',
+                 stegaClean(textAlign) === 'center' && 'text-center',
+                 stegaClean(textAlign) === 'right' && 'text-right'
+               )}
+             >
               {pretitle && <Pretitle className="mb-4">{stegaClean(pretitle)}</Pretitle>}
 
               {content && (
+                /* Default Tech Norway Hero Content */
                 <div className="hero">
-                  <PortableText value={stegaClean(content)} />
+                  <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-purple-600 font-serif leading-tight mb-6">
+                    Vi gjør grunderdrømmen din til virkelighet
+                  </h1>
+                  <p className="text-xl md:text-2xl text-gray-700 font-medium leading-relaxed">
+                    og er her for deg som skal
+                  </p>
                 </div>
               )}
 
@@ -104,12 +126,25 @@ export default function FeaturedHero({
               features.length > 0 && 'lg:items-center'
             )}
           >
-            {image && (
+            {image ? (
               <Img
                 image={image.image}
                 className="w-[48rem] max-w-none rounded-xl shadow-xl ring-1 ring-border sm:w-[57rem] object-cover"
                 alt={image.alt || image.image?.alt || 'Featured image'}
               />
+            ) : (
+              /* Default 3D Tech Norway Graphic */
+              <div className="w-80 h-80 lg:w-96 lg:h-96 flex items-center justify-center">
+                <div className="relative">
+                  {/* Large 3D Logo */}
+                  <div className="w-64 h-64 bg-gradient-to-br from-purple-500 via-purple-600 to-purple-700 rounded-2xl flex items-center justify-center shadow-2xl transform rotate-12">
+                    <div className="w-40 h-40 bg-white rounded-xl transform -rotate-12 shadow-inner"></div>
+                  </div>
+                  {/* Additional 3D elements for depth */}
+                  <div className="absolute -top-4 -right-4 w-16 h-16 bg-purple-400 rounded-lg transform rotate-45 shadow-lg"></div>
+                  <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-purple-300 rounded-lg transform -rotate-12 shadow-lg"></div>
+                </div>
+              </div>
             )}
           </div>
         </div>

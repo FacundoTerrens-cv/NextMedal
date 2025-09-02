@@ -48,20 +48,20 @@ export default function FeatureGrid({
             <Card
               key={item._key}
               className={cn(
-                'h-full relative overflow-hidden shadow-none !border-none',
+                'h-full relative overflow-hidden norwegian-card',
                 'dark:bg-card/80 dark:backdrop-blur-sm'
               )}
             >
               {/* Accent line at the top */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-muted-foreground" />
+              <div className="absolute top-0 left-0 right-0 h-1 bg-purple-500" />
               <div className="p-6">
                 <div className="flex flex-col h-full">
                   {/* Header with icon and title */}
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="flex-shrink-0 w-10 h-10 rounded-md flex items-center justify-center bg-muted text-foreground">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center bg-purple-100 text-purple-600">
                       {item.icon && <Icon icon={item.icon} className="w-6 h-6" />}
                     </div>
-                    <CardTitle>{item.summary}</CardTitle>
+                    <CardTitle className="text-purple-600 font-bold text-lg">{item.summary}</CardTitle>
                   </div>
                   {/* Description */}
                   <CardDescription>

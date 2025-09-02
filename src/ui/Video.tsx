@@ -36,17 +36,27 @@ const MuxPlayer = dynamic(() => import('@mux/mux-player-react'), {
   ssr: false,
 });
 
-// Import regular ReactPlayer instead of YouTube specific
-const ReactPlayer = dynamic(() => import('react-player/lazy'), {
-  loading: () => (
-    <div className="w-full h-full bg-black flex flex-col items-center justify-center">
-      <div className="w-16 h-16 rounded-full border-4 border-transparent border-t-primary animate-spin mb-4" />
-      <p className="text-white font-medium text-lg">Loading your content...</p>
-      <p className="text-white/70 text-sm mt-1">YouTube player is being prepared</p>
-    </div>
-  ),
-  ssr: false,
-});
+// YouTube Player Component using iframe for React 19 compatibility
+const YouTubePlayer = ({ url, onError }: { url: string; onError: (err: any) => void }) => {
+  const videoId = getYouTubeVideoId(url);
+  
+  if (!videoId) {
+    onError('Invalid YouTube URL');
+    return null;
+  }
+
+  return (
+    <iframe
+      src={`https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1&rel=0`}
+      width="100%"
+      height="100%"
+      frameBorder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+      onError={onError}
+    />
+  );
+};
 
 // -------------- Modular YouTube Utilities --------------
 
@@ -133,7 +143,7 @@ const useMuxVideo = (data: Video) => {
 };
 
 // YouTube Player Component
-const YouTubePlayer = ({
+const YouTubePlayerComponent = ({
   url,
   onError,
 }: {
@@ -142,7 +152,7 @@ const YouTubePlayer = ({
 }) => {
   return (
     <div className="w-full h-full">
-      <ReactPlayer url={url} width="100%" height="100%" playing controls onError={onError} />
+      <YouTubePlayer url={url} onError={onError} />
     </div>
   );
 };
