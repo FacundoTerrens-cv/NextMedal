@@ -56,9 +56,17 @@ export default defineType({
       name: 'logo',
       title: 'Site Logo',
       description: "Upload your site's logo. Used in the header and for social sharing.",
-      type: 'logo',
+      type: 'logoObject',
       group: 'appearance',
       fieldset: 'branding',
+    }),
+    defineField({
+      name: 'footerLogo',
+      title: 'Footer Logo',
+      description: "Upload a logo specifically for the footer. If not provided, the main site logo will be used.",
+      type: 'logoObject',
+      group: 'appearance',
+      fieldset: 'footer',
     }),
     // Navigation Group - Header first, then footer, then rest
     defineField({

@@ -3,6 +3,137 @@
 @import "fumadocs-ui/css/neutral.css";
 @import "fumadocs-ui/css/preset.css";
 
+/* Grid Network Animations for FeaturedHero */
+@keyframes grid-dot-pulse {
+  0%, 100% {
+    r: 3;
+    opacity: 0.4;
+  }
+  50% {
+    r: 4;
+    opacity: 0.8;
+  }
+}
+
+@keyframes grid-line-fade {
+  0%, 100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes grid-line-draw {
+  0% {
+    stroke-dasharray: 0 150;
+  }
+  100% {
+    stroke-dasharray: 150 0;
+  }
+}
+
+
+
+@keyframes dot-pulse {
+  0%, 100% {
+    r: 4;
+    opacity: 0.6;
+  }
+  50% {
+    r: 6;
+    opacity: 1;
+  }
+}
+
+@keyframes dot-pulse-large {
+  0%, 100% {
+    r: 5;
+    opacity: 0.7;
+  }
+  50% {
+    r: 7;
+    opacity: 1;
+  }
+}
+
+@keyframes connection-flow {
+  0% {
+    stroke-dasharray: 0 100;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dasharray: 100 0;
+    opacity: 0;
+  }
+}
+
+@keyframes network-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 2px #a855f7);
+  }
+  50% {
+    filter: drop-shadow(0 0 8px #a855f7) drop-shadow(0 0 12px #a855f7);
+  }
+}
+
+/* Grid Network Animation Classes */
+.grid-dot {
+  animation: grid-dot-pulse 4s ease-in-out infinite;
+  will-change: r, opacity;
+}
+
+.grid-dot:nth-child(odd) {
+  animation-delay: 0.5s;
+}
+
+.grid-dot:nth-child(3n) {
+  animation-delay: 1s;
+}
+
+.grid-dot:nth-child(4n) {
+  animation-delay: 1.5s;
+}
+
+.grid-dot:nth-child(5n) {
+  animation-delay: 2s;
+}
+
+.grid-line {
+  will-change: opacity;
+}
+
+.grid-line.horizontal {
+  animation: grid-line-fade 6s ease-in-out infinite;
+}
+
+.grid-line.vertical {
+  animation: grid-line-fade 8s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.grid-line.horizontal:nth-child(odd) {
+  animation-delay: 0.5s;
+}
+
+.grid-line.horizontal:nth-child(3n) {
+  animation-delay: 1.5s;
+}
+
+.grid-line.vertical:nth-child(odd) {
+  animation-delay: 1.5s;
+}
+
+.grid-line.vertical:nth-child(3n) {
+  animation-delay: 2.5s;
+}
+
 /* Estilos personalizados para diseño noruego */
 @layer components {
   .norwegian-hero {
@@ -84,9 +215,9 @@
   --light-sidebar-border: hsl(220 13% 91%);
   --light-sidebar-ring: hsl(217.2 91.2% 59.8%);
 
-  --dark-background: 222 47% 11%;
+  --dark-background: 222 47% 8%;
   --dark-foreground: 210 40% 98%;
-  --dark-card: 222 47% 11%;
+  --dark-card: 222 47% 15%;
   --dark-card-foreground: 210 40% 98%;
   --dark-popover: 222 47% 11%;
   --dark-popover-foreground: 210 40% 98%;

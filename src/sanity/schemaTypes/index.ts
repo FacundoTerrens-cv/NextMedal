@@ -7,6 +7,7 @@ import globalModule from './documents/global-module';
 
 import navigation from './documents/navigation';
 import page from './documents/page';
+import pageContent from './documents/page-content';
 import redirect from './documents/redirect';
 import site from './documents/site';
 
@@ -26,6 +27,9 @@ import linkList from './objects/link.list';
 import metadata from './objects/metadata';
 import moduleOptions from './objects/module-options';
 import stat from './objects/stat';
+import translation from './objects/translation';
+import translationText from './objects/translation-text';
+import logoObject from './objects/logo';
 
 // modules
 import accordionList from './modules/accordion-list';
@@ -59,6 +63,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   blogPost,
   globalModule,
   page,
+  pageContent,
   redirect,
   site,
   navigation,
@@ -78,6 +83,9 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   metadata,
   moduleOptions,
   stat,
+  translation,
+  translationText,
+  logoObject,
   modules,
 
   // modules

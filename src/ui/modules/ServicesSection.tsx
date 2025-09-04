@@ -1,9 +1,12 @@
+'use client';
+
 import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card';
 import moduleProps from '@/lib/moduleProps';
 import { cn } from '@/lib/utils';
 import { Img } from '@/ui/Img';
 import { PortableText } from 'next-sanity';
 import { CheckCircle } from 'lucide-react';
+import { useTranslation } from '@/hooks/useTranslation';
 
 export default function ServicesSection({
   pretitle,
@@ -24,75 +27,85 @@ export default function ServicesSection({
   }[];
 }> &
   Sanity.Module) {
+  const { t, language } = useTranslation();
   return (
-    <section className="py-24 bg-gray-50" {...moduleProps(props)}>
+    <section className="py-24 bg-white dark:bg-[#1a1a2e]" {...moduleProps(props)}>
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header Section */}
-        <div className="text-center mb-16">
-          {pretitle && (
-            <div className="text-sm font-semibold text-purple-600 uppercase tracking-wide mb-4">
-              {pretitle}
-            </div>
-          )}
-          {title && (
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              {title}
-            </h2>
-          )}
-          {subtitle && (
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              {subtitle}
-            </p>
-          )}
+        <div className="text-center mb-20">
+          <div className="inline-block px-4 py-2 bg-purple-100 dark:bg-purple-500/20 text-purple-600 dark:text-purple-400 text-sm font-semibold uppercase tracking-wide rounded-full mb-6">
+            {t.services.pretitle}
+          </div>
+          <h2 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
+            {t.services.title}
+          </h2>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            {t.services.subtitle}
+          </p>
         </div>
 
         {/* Services Grid */}
         <div className="grid gap-8 lg:gap-12 md:grid-cols-3">
-          {services?.map((service) => (
-            <Card
+          {services?.map((service, index) => (
+            <div
               key={service._key}
-              className="h-full bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden"
+              className="group h-full bg-white dark:bg-[#252b36] border border-gray-200 dark:border-gray-700 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-2"
             >
               {/* Service Image */}
               {service.image && (
-                <div className="relative h-48 overflow-hidden">
+                <div className="relative h-56 overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10"></div>
                   <Img
                     image={service.image.image}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     alt={service.image.alt || service.title}
                   />
                 </div>
               )}
               
               {/* Service Content */}
-              <CardContent className="p-6">
-                <CardTitle className="text-xl font-bold text-purple-600 mb-4">
-                  {service.title}
-                </CardTitle>
+              <div className="p-8">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center text-white font-bold text-lg">
+                    {index + 1}
+                  </div>
+                  <div className="w-8 h-8 bg-purple-100 dark:bg-purple-500/20 rounded-full flex items-center justify-center">
+                    <CheckCircle className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+                  </div>
+                </div>
                 
-                <CardDescription className="text-gray-700 mb-6 leading-relaxed">
-                  {service.description}
-                </CardDescription>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-300">
+                  {service.title?.[language] || service.title?.no || service.title?.en || service.title}
+                </h3>
+                
+                <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed text-base">
+                  {service.description?.[language] || service.description?.no || service.description?.en || service.description}
+                </p>
 
                 {/* Features List */}
                 {service.features && service.features.length > 0 && (
                   <ul className="space-y-3">
-                    {service.features.map((feature, index) => (
-                      <li key={index} className="flex items-start gap-3">
-                        <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-700 text-sm">{feature}</span>
+                    {service.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-start gap-3">
+                        <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
+                        <span className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                          {feature?.[language] || feature?.no || feature?.en || feature}
+                        </span>
                       </li>
                     ))}
                   </ul>
                 )}
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           ))}
         </div>
       </div>
     </section>
   );
 }
+
+
+
 
 
 

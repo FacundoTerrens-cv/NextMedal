@@ -71,11 +71,19 @@ declare global {
 
     // documents
 
+    interface LogoObject {
+      readonly _type: 'logoObject';
+      image?: Img;
+      width?: number;
+      height?: number;
+    }
+
     interface Site extends SanityDocument {
       // branding
       title: string;
       tagline?: any;
-      logo?: Logo;
+      logo?: LogoObject;
+      footerLogo?: LogoObject;
       // info
       announcements?: Announcement[];
       copyright?: any;
@@ -176,6 +184,18 @@ declare global {
     }
 
     // objects
+
+    interface Translation {
+      readonly _type: 'translation';
+      no?: string;
+      en?: string;
+    }
+
+    interface TranslationText {
+      readonly _type: 'translationText';
+      no?: string;
+      en?: string;
+    }
 
     interface CTA {
       readonly _type?: 'cta';
@@ -320,6 +340,41 @@ declare global {
       description: string;
       ctas?: CTA[];
       image?: Img;
+    }
+
+    // Services Section module interface
+    interface ServicesSection extends Module<'services-section'> {
+      pretitle?: Translation;
+      title?: Translation;
+      subtitle?: TranslationText;
+      services?: Array<{
+        _key: string;
+        title: Translation;
+        description: TranslationText;
+        image: Img;
+        features: Translation[];
+      }>;
+    }
+
+    // Why Choose Us module interface
+    interface WhyChooseUs extends Module<'why-choose-us'> {
+      title?: string;
+      description?: string;
+      features?: Array<{
+        title: string;
+        description: string;
+      }>;
+      stats?: Array<{
+        number: string;
+        label: string;
+      }>;
+      testimonials?: Array<{
+        _key: string;
+        rating: number;
+        quote: string;
+        author: string;
+        position: string;
+      }>;
     }
   }
 }

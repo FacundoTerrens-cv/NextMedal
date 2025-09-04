@@ -1,8 +1,52 @@
 'use client';
 
 import { ChevronUp } from 'lucide-react';
+import { useTranslation } from '@/hooks/useTranslation';
+import { Img } from '@/ui/Img';
+import { urlFor } from '@/sanity/lib/image';
 
-export default function Footer() {
+interface FooterProps {
+  site?: {
+    footerLogo?: {
+      image?: {
+        asset?: {
+          _id: string;
+          url: string;
+          metadata?: {
+            dimensions?: {
+              width: number;
+              height: number;
+            };
+          };
+        };
+        alt?: string;
+      };
+      width?: number;
+      height?: number;
+    };
+    logo?: {
+      image?: {
+        asset?: {
+          _id: string;
+          url: string;
+          metadata?: {
+            dimensions?: {
+              width: number;
+              height: number;
+            };
+          };
+        };
+        alt?: string;
+      };
+      width?: number;
+      height?: number;
+    };
+  };
+}
+
+export default function Footer({ site }: FooterProps) {
+  const { t } = useTranslation();
+  
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -19,77 +63,93 @@ export default function Footer() {
           {/* Column 1: Tech Norway Information */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-4">
-              {/* 3D Logo */}
-              <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-700 rounded-lg flex items-center justify-center shadow-lg transform rotate-12">
-                <div className="w-6 h-6 bg-white rounded-sm transform -rotate-12"></div>
-              </div>
+              {/* Logo */}
+              {site?.footerLogo?.image?.asset || site?.logo?.image?.asset ? (
+                <div className="flex-shrink-0">
+                  <Img
+                    image={site?.footerLogo?.image || site?.logo?.image}
+                    alt={site?.footerLogo?.image?.alt || site?.logo?.image?.alt || 'Tech Norway Logo'}
+                    width={site?.footerLogo?.width || site?.logo?.width || 48}
+                    height={site?.footerLogo?.height || site?.logo?.height || 48}
+                    className="w-12 h-12 object-contain"
+                  />
+                </div>
+              ) : (
+                <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-700 rounded-xl flex items-center justify-center shadow-lg">
+                  <svg 
+                    width="24" 
+                    height="24" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    className="text-white"
+                  >
+                    {/* Tech Norway Logo - Clean T + N design */}
+                    <path 
+                      d="M4 4H20V6H13V20H11V6H4V4Z" 
+                      fill="currentColor"
+                    />
+                    <path 
+                      d="M15 8H17V10H19V12H17V14H15V12H13V10H15V8Z" 
+                      fill="currentColor"
+                    />
+                    <path 
+                      d="M15 16H17V18H19V20H17V22H15V20H13V18H15V16Z" 
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+              )}
               <h3 className="text-xl font-bold text-white">Tech Norway</h3>
             </div>
             <p className="text-gray-300 text-sm leading-relaxed">
-              Norges ledende akselerator for ambisiøse tech-startups.
+              {t.footer.description}
             </p>
           </div>
 
-          {/* Column 2: Tjenester (Services) */}
+          {/* Column 2: Services */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Tjenester</h4>
+            <h4 className="text-white font-semibold mb-4">{t.footer.services.title}</h4>
             <ul className="space-y-2">
-              <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors duration-200 text-sm">
-                  Strategisk rådgivning
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors duration-200 text-sm">
-                  Nettverk & Partnere
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors duration-200 text-sm">
-                  Akselerasjonsprogram
-                </a>
-              </li>
+              {t.footer.services.items.map((item, index) => (
+                <li key={index}>
+                  <a href="#" className="text-gray-300 hover:text-white transition-colors duration-200 text-sm">
+                    {item}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Column 3: Ressurser (Resources) */}
+          {/* Column 3: Resources */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Ressurser</h4>
+            <h4 className="text-white font-semibold mb-4">{t.footer.resources.title}</h4>
             <ul className="space-y-2">
-              <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors duration-200 text-sm">
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors duration-200 text-sm">
-                  Case studies
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors duration-200 text-sm">
-                  Webinarer
-                </a>
-              </li>
+              {t.footer.resources.items.map((item, index) => (
+                <li key={index}>
+                  <a href="#" className="text-gray-300 hover:text-white transition-colors duration-200 text-sm">
+                    {item}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Column 4: Kontakt (Contact) */}
+          {/* Column 4: Contact */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Kontakt</h4>
+            <h4 className="text-white font-semibold mb-4">{t.footer.contact.title}</h4>
             <div className="space-y-2 text-sm">
-              <p className="text-gray-300">Oslo, Norge</p>
+              <p className="text-gray-300">{t.footer.contact.location}</p>
               <a 
                 href="mailto:post@technorway.no" 
                 className="text-gray-300 hover:text-white transition-colors duration-200 block"
               >
-                post@technorway.no
+                {t.footer.contact.email}
               </a>
               <a 
                 href="tel:+4712345678" 
                 className="text-gray-300 hover:text-white transition-colors duration-200 block"
               >
-                +47 123 45 678
+                {t.footer.contact.phone}
               </a>
             </div>
           </div>
@@ -102,7 +162,7 @@ export default function Footer() {
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
           {/* Copyright */}
           <p className="text-gray-400 text-sm text-center sm:text-left">
-            © 2024 Tech Norway. Alle rettigheter reservert.
+            {t.footer.copyright}
           </p>
 
           {/* Scroll to Top Button */}

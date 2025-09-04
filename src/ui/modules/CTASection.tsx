@@ -1,6 +1,7 @@
 'use client';
 
 import moduleProps from '@/lib/moduleProps';
+import { useTranslation } from '@/hooks/useTranslation';
 
 export default function CTASection({
   title,
@@ -22,6 +23,8 @@ export default function CTASection({
     action?: string;
   };
 } & Sanity.Module) {
+  const { t } = useTranslation();
+  
   const handlePrimaryClick = () => {
     if (primaryButton?.url) {
       window.open(primaryButton.url, '_blank');
@@ -45,40 +48,32 @@ export default function CTASection({
       <div className="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           {/* Main Heading */}
-          {title && (
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-              {title}
-            </h2>
-          )}
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+            {t.cta.title}
+          </h2>
 
           {/* Description */}
-          {description && (
-            <p className="text-xl text-white mb-12 leading-relaxed max-w-3xl mx-auto">
-              {description}
-            </p>
-          )}
+          <p className="text-xl text-white mb-12 leading-relaxed max-w-3xl mx-auto">
+            {t.cta.description}
+          </p>
 
           {/* Call-to-Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
             {/* Primary Button */}
-            {primaryButton && (
-              <button
-                onClick={handlePrimaryClick}
-                className="bg-white text-purple-600 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-colors duration-200 text-lg min-w-[200px]"
-              >
-                {primaryButton.text}
-              </button>
-            )}
+            <button
+              onClick={handlePrimaryClick}
+              className="bg-white text-purple-600 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-colors duration-200 text-lg min-w-[200px]"
+            >
+              {t.cta.primaryButton}
+            </button>
 
             {/* Secondary Button */}
-            {secondaryButton && (
-              <button
-                onClick={handleSecondaryClick}
-                className="bg-purple-600 text-white border-2 border-white px-8 py-4 rounded-full font-semibold hover:bg-purple-700 transition-colors duration-200 text-lg min-w-[200px]"
-              >
-                {secondaryButton.text}
-              </button>
-            )}
+            <button
+              onClick={handleSecondaryClick}
+              className="bg-purple-600 text-white border-2 border-white px-8 py-4 rounded-full font-semibold hover:bg-purple-700 transition-colors duration-200 text-lg min-w-[200px]"
+            >
+              {t.cta.secondaryButton}
+            </button>
           </div>
         </div>
       </div>

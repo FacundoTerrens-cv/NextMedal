@@ -1,9 +1,12 @@
+'use client';
+
 import { Card, CardDescription, CardTitle } from '@/components/ui/card';
 import moduleProps from '@/lib/moduleProps';
 import { cn } from '@/lib/utils';
 import Icon from '@/ui/Icon';
 import Pretitle from '@/ui/Pretitle';
 import { PortableText } from 'next-sanity';
+import { useTranslation } from '@/hooks/useTranslation';
 
 export default function FeatureGrid({
   pretitle,
@@ -21,20 +24,21 @@ export default function FeatureGrid({
   }[];
 }> &
   Sanity.Module) {
+  const { t } = useTranslation();
   return (
-    <section className="section " {...moduleProps(props)}>
+    <section className="py-24 bg-white dark:bg-[#1a1a2e]" {...moduleProps(props)}>
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {(pretitle || intro) && (
-          <div className="section-intro text-center items-center flex flex-col mb-12 ">
+          <div className="text-center mb-20">
             {pretitle && <Pretitle className="mb-4">{pretitle}</Pretitle>}
             {intro && (
               <>
-                <div className="text-4xl md:text-5xl lg:text-6xl font-bold text-center ">
+                <div className="text-4xl md:text-5xl lg:text-6xl font-bold text-center text-gray-900 dark:text-white">
                   <PortableText value={[intro[0]]} />
                 </div>
                 <div className="mb-4" />
                 {intro[1] && (
-                  <div className="text-lg md:text-xl text-center font-normal mx-auto max-w-2xl">
+                  <div className="text-lg md:text-xl text-center font-normal mx-auto max-w-2xl text-gray-600 dark:text-gray-300">
                     <PortableText value={[intro[1]]} />
                   </div>
                 )}
@@ -43,34 +47,71 @@ export default function FeatureGrid({
             )}
           </div>
         )}
-        <div className={cn('grid gap-8 lg:gap-12 md:grid-cols-3')}>
-          {items?.map((item) => (
-            <Card
-              key={item._key}
-              className={cn(
-                'h-full relative overflow-hidden norwegian-card',
-                'dark:bg-card/80 dark:backdrop-blur-sm'
-              )}
-            >
-              {/* Accent line at the top */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-purple-500" />
-              <div className="p-6">
-                <div className="flex flex-col h-full">
-                  {/* Header with icon and title */}
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center bg-purple-100 text-purple-600">
-                      {item.icon && <Icon icon={item.icon} className="w-6 h-6" />}
-                    </div>
-                    <CardTitle className="text-purple-600 font-bold text-lg">{item.summary}</CardTitle>
-                  </div>
-                  {/* Description */}
-                  <CardDescription>
-                    <PortableText value={item.content} />
-                  </CardDescription>
+        <div className={cn('grid gap-6 md:grid-cols-3')}>
+          {/* Hardcoded features with translations */}
+          <div className="bg-white dark:bg-[#252b36] border border-gray-200 dark:border-purple-500 rounded-2xl p-6 hover:border-purple-400 transition-all duration-300">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 bg-gray-100 dark:bg-white rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="w-6 h-6 bg-purple-600 dark:bg-purple-500 rounded-full"></div>
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-bold text-purple-600 dark:text-purple-400 mb-2">
+                  {t.featureGrid.features.develop}
+                </h3>
+                <div className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                  {t.featureGrid.features.developDesc}
                 </div>
               </div>
-            </Card>
-          ))}
+            </div>
+          </div>
+
+          <div className="bg-white dark:bg-[#252b36] border border-gray-200 dark:border-purple-500 rounded-2xl p-6 hover:border-purple-400 transition-all duration-300">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 bg-gray-100 dark:bg-white rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="w-6 h-6 bg-purple-600 dark:bg-purple-500 rounded-full"></div>
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-bold text-purple-600 dark:text-purple-400 mb-2">
+                  {t.featureGrid.features.market}
+                </h3>
+                <div className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                  {t.featureGrid.features.marketDesc}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white dark:bg-[#252b36] border border-gray-200 dark:border-purple-500 rounded-2xl p-6 hover:border-purple-400 transition-all duration-300">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 bg-gray-100 dark:bg-white rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="w-6 h-6 bg-purple-600 dark:bg-purple-500 rounded-full"></div>
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-bold text-purple-600 dark:text-purple-400 mb-2">
+                  {t.featureGrid.features.internationalize}
+                </h3>
+                <div className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                  {t.featureGrid.features.internationalizeDesc}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white dark:bg-[#252b36] border border-gray-200 dark:border-purple-500 rounded-2xl p-6 hover:border-purple-400 transition-all duration-300">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 bg-gray-100 dark:bg-white rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="w-6 h-6 bg-purple-600 dark:bg-purple-500 rounded-full"></div>
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-bold text-purple-600 dark:text-purple-400 mb-2">
+                  {t.featureGrid.features.innovate}
+                </h3>
+                <div className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                  {t.featureGrid.features.innovateDesc}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

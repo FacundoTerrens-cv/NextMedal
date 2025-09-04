@@ -1,5 +1,8 @@
+'use client';
+
 import moduleProps from '@/lib/moduleProps';
 import { Img } from '@/ui/Img';
+import { useTranslation } from '@/hooks/useTranslation';
 
 export default function PartnersSection({
   title,
@@ -16,37 +19,19 @@ export default function PartnersSection({
     website?: string;
   }[];
 } & Sanity.Module) {
-  
-  // Debug: Log the data
-  console.log('PartnersSection Debug:', { title, subtitle, partners });
-  console.log('Partners array:', partners);
-  if (partners && partners.length > 0) {
-    partners.forEach((partner, index) => {
-      console.log(`Partner ${index + 1}:`, {
-        name: partner.name,
-        logo: partner.logo,
-        logoImage: partner.logo?.image,
-        hasLogo: !!partner.logo,
-        hasLogoImage: !!partner.logo?.image
-      });
-    });
-  }
+  const { t, language } = useTranslation();
   
   return (
-    <section className="py-24 bg-white" {...moduleProps(props)}>
+    <section className="py-24 bg-white dark:bg-[#1a1a2e]" {...moduleProps(props)}>
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header Section */}
         <div className="text-center mb-16">
-          {title && (
-            <h2 className="text-4xl md:text-5xl font-bold text-purple-600 mb-6 leading-tight">
-              {title}
-            </h2>
-          )}
-          {subtitle && (
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              {subtitle}
-            </p>
-          )}
+          <h2 className="text-4xl md:text-5xl font-bold text-purple-600 dark:text-purple-400 mb-6 leading-tight">
+            {t.partners.title}
+          </h2>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            {t.partners.subtitle}
+          </p>
         </div>
 
         {/* Partners Grid */}
@@ -55,7 +40,7 @@ export default function PartnersSection({
             {partners.map((partner) => (
               <div
                 key={partner._key}
-                className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 p-8 flex items-center justify-center"
+                className="bg-white dark:bg-[#252b36] border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm hover:shadow-md hover:border-purple-400 transition-all duration-300 p-8 flex items-center justify-center"
               >
                 {partner.logo ? (
                   <div className="flex items-center justify-center w-full h-24">
@@ -67,11 +52,11 @@ export default function PartnersSection({
                   </div>
                 ) : (
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-gray-400 mb-2">
+                    <div className="text-2xl font-bold text-gray-500 dark:text-gray-400 mb-2">
                       {partner.name}
                     </div>
-                    <div className="text-sm text-gray-500">
-                      Logo ikke tilgjengelig
+                    <div className="text-sm text-gray-500 dark:text-gray-500">
+                      {language === 'no' ? 'Logo ikke tilgjengelig' : 'Logo not available'}
                     </div>
                   </div>
                 )}
@@ -82,11 +67,11 @@ export default function PartnersSection({
 
         {/* Call to Action */}
         <div className="text-center mt-16">
-          <p className="text-lg text-gray-600 mb-6">
-            Er du interessert i å bli partner?
+          <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
+            {t.partners.cta}
           </p>
-          <button className="bg-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors duration-200">
-            Kontakt oss
+          <button className="bg-purple-600 dark:bg-purple-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-purple-700 dark:hover:bg-purple-400 transition-colors duration-200">
+            {t.partners.contactButton}
           </button>
         </div>
       </div>

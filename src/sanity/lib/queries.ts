@@ -115,6 +115,30 @@ export const MODULES_QUERY = groq`
 		thumbnail,
 		title
 	},
+	_type == 'partners-section' => {
+		...,
+		partners[]{
+			...,
+			logo{
+				...,
+				"image": asset->,
+				altText,
+				loading
+			}
+		}
+	},
+	_type == 'services-section' => {
+		...,
+		services[]{
+			...,
+			image{
+				...,
+				"image": asset->,
+				altText,
+				loading
+			}
+		}
+	},
 `;
 
 export const GLOBAL_MODULE_QUERY = groq`
@@ -123,4 +147,104 @@ export const GLOBAL_MODULE_QUERY = groq`
 		defined(excludePaths) => count(excludePaths[string::startsWith($slug, @)]) == 0,
 		true
 	)
+`;
+
+export const SITE_QUERY = groq`
+	*[_type == "site"][0] {
+		title,
+		tagline,
+		logo {
+			image {
+				asset->{
+					_id,
+					url,
+					metadata {
+						dimensions
+					}
+				},
+				alt
+			},
+			width,
+			height
+		},
+		footerLogo {
+			image {
+				asset->{
+					_id,
+					url,
+					metadata {
+						dimensions
+					}
+				},
+				alt
+			},
+			width,
+			height
+		},
+		announcements[]->{
+			title,
+			content,
+			cta
+		},
+		copyright,
+		ctas[]{
+			${CTA_QUERY}
+		},
+		headerMenu->{
+			${NAVIGATION_QUERY}
+		},
+		footerMenu->{
+			${NAVIGATION_QUERY}
+		},
+		socialLinks[]{
+			text,
+			url
+		}
+	}
+`;
+
+export const PAGE_CONTENT_QUERY = groq`
+	*[_type == "pageContent" && pageType == $pageType][0] {
+		title,
+		slug,
+		pageType,
+		hero {
+			pretitle,
+			title,
+			subtitle
+		},
+		sections[]{
+			_type,
+			title,
+			subtitle,
+			stats[]{
+				number,
+				label
+			},
+			content[]{
+				_type,
+				title,
+				description,
+				category,
+				icon,
+				features[],
+				stats[]{
+					icon,
+					text
+				}
+			},
+			testimonials[]{
+				quote,
+				author,
+				position,
+				rating
+			}
+		},
+		cta {
+			title,
+			subtitle,
+			primaryButton,
+			secondaryButton
+		}
+	}
 `;

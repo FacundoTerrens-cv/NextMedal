@@ -11,6 +11,7 @@ import Footer from '@/ui/footer';
 import Header from '@/ui/header';
 import { RootProvider } from 'fumadocs-ui/provider';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
+import { TranslationProvider } from '@/hooks/useTranslation';
 
 export default async function RootLayout({
   children,
@@ -36,26 +37,28 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <RootProvider>
-            <ThemeColorSetter
-              lightTheme={themeSettings.lightMode}
-              darkTheme={themeSettings.darkMode}
-            />
-            <NuqsAdapter>
-              <SkipToContent />
-              <Announcement />
-              <Header />
-              <main
-                id="main-content"
-                className="flex-1 min-h-[calc(100dvh-var(--header-height)-var(--footer-height))]"
-                tabIndex={-1}
-              >
-                {children}
-              </main>
-              <Footer />
-              <VisualEditingControls />
-            </NuqsAdapter>
-          </RootProvider>
+          <TranslationProvider>
+            <RootProvider>
+              <ThemeColorSetter
+                lightTheme={themeSettings.lightMode}
+                darkTheme={themeSettings.darkMode}
+              />
+              <NuqsAdapter>
+                <SkipToContent />
+                <Announcement />
+                <Header site={site} />
+                <main
+                  id="main-content"
+                  className="flex-1 min-h-[calc(100dvh-var(--header-height)-var(--footer-height))]"
+                  tabIndex={-1}
+                >
+                  {children}
+                </main>
+                <Footer site={site} />
+                <VisualEditingControls />
+              </NuqsAdapter>
+            </RootProvider>
+          </TranslationProvider>
         </ThemeProvider>
       </body>
     </html>

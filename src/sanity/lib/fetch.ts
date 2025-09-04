@@ -70,6 +70,37 @@ export async function getSite() {
 				footerMenu->{ ${NAVIGATION_QUERY} },
 				socialLinks,
 				'ogimage': ogimage.asset->url,
+				logo{
+					...,
+					image{
+						default{
+							...,
+							"image": asset->,
+							altText,
+							loading
+						},
+						light{
+							...,
+							"image": asset->,
+							altText,
+							loading
+						},
+						dark{
+							...,
+							"image": asset->,
+							altText,
+							loading
+						}
+					}
+				},
+				footerLogo{
+					...,
+					image{
+						...,
+						"image": asset->,
+						alt
+					}
+				}
 			}
 		`,
   });
@@ -82,4 +113,57 @@ export async function getSite() {
     );
 
   return site;
+}
+
+export async function getPageContent(pageType: string) {
+  const pageContent = await fetchSanityLive<any>({
+    query: groq`
+      *[_type == "pageContent" && pageType == $pageType][0] {
+        title,
+        slug,
+        pageType,
+        hero {
+          pretitle,
+          title,
+          subtitle
+        },
+        sections[]{
+          _type,
+          title,
+          subtitle,
+          stats[]{
+            number,
+            label
+          },
+          content[]{
+            _type,
+            title,
+            description,
+            category,
+            icon,
+            features[],
+            stats[]{
+              icon,
+              text
+            }
+          },
+          testimonials[]{
+            quote,
+            author,
+            position,
+            rating
+          }
+        },
+        cta {
+          title,
+          subtitle,
+          primaryButton,
+          secondaryButton
+        }
+      }
+    `,
+    params: { pageType },
+  });
+
+  return pageContent;
 }
