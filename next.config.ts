@@ -17,7 +17,11 @@ const withMDX = createMDX();
 const config = {
   reactStrictMode: true,
   poweredByHeader: false,
-  output: "standalone",
+  output: "export",
+  trailingSlash: true,
+  images: {
+    unoptimized: true
+  },
   // Configure image handling
   images: {
     dangerouslyAllowSVG: true,
