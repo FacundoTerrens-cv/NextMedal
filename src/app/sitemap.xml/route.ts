@@ -2,6 +2,8 @@ import { fetchSanityLive } from '@/sanity/lib/fetch';
 import { groq } from 'next-sanity';
 import type { NextRequest } from 'next/server';
 
+export const dynamic = 'force-static';
+
 export async function GET(_req: NextRequest) {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? 'http://localhost:3000';
   let data: Record<string, any>;

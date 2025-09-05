@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 import { getSite, getPageContent } from '@/sanity/lib/fetch';
-import { useTranslation } from '@/hooks/useTranslation';
 import { CheckCircle, Users, Target, TrendingUp, Lightbulb, Handshake } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -112,11 +111,11 @@ export default async function ServicesPage() {
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {content.sections
-              .filter(section => section._type === 'contentSection')
-              .map(section => 
+              .filter((section: any) => section._type === 'contentSection')
+              .map((section: any) => 
                 section.content
-                  .filter(item => item._type === 'service')
-                  .map((service, index) => {
+                  .filter((item: any) => item._type === 'service')
+                  .map((service: any, index: number) => {
                     const IconComponent = service.icon === 'Target' ? Target : 
                                         service.icon === 'Handshake' ? Handshake : 
                                         service.icon === 'TrendingUp' ? TrendingUp : Target;
@@ -133,7 +132,7 @@ export default async function ServicesPage() {
                           {service.description}
                         </p>
                         <ul className="space-y-3">
-                          {service.features.map((feature, featureIndex) => (
+                          {service.features.map((feature: any, featureIndex: number) => (
                             <li key={featureIndex} className="flex items-start gap-3">
                               <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
                               <span className="text-gray-700 dark:text-gray-300">{feature}</span>
@@ -150,8 +149,8 @@ export default async function ServicesPage() {
 
       {/* Stats Section */}
       {content.sections
-        .filter(section => section._type === 'statsSection')
-        .map((section, index) => (
+        .filter((section: any) => section._type === 'statsSection')
+        .map((section: any, index: number) => (
           <section key={index} className="bg-gray-50 dark:bg-gray-800 py-20">
             <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-16">
@@ -164,7 +163,7 @@ export default async function ServicesPage() {
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                {section.stats.map((stat, statIndex) => (
+                {section.stats.map((stat: any, statIndex: number) => (
                   <div key={statIndex} className="text-center">
                     <div className="text-4xl md:text-5xl font-bold text-purple-600 dark:text-purple-400 mb-2">
                       {stat.number}

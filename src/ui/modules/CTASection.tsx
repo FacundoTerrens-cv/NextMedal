@@ -1,7 +1,6 @@
 'use client';
 
 import moduleProps from '@/lib/moduleProps';
-import { useTranslation } from '@/hooks/useTranslation';
 
 export default function CTASection({
   title,
@@ -23,7 +22,6 @@ export default function CTASection({
     action?: string;
   };
 } & Sanity.Module) {
-  const { t } = useTranslation();
   
   const handlePrimaryClick = () => {
     if (primaryButton?.url) {
@@ -49,12 +47,12 @@ export default function CTASection({
         <div className="text-center">
           {/* Main Heading */}
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-            {t.cta.title}
+            Klar for å starte ditt neste prosjekt?
           </h2>
 
           {/* Description */}
           <p className="text-xl text-white mb-12 leading-relaxed max-w-3xl mx-auto">
-            {t.cta.description}
+            La oss hjelpe deg å realisere dine ideer med moderne teknologi og ekspertise
           </p>
 
           {/* Call-to-Action Buttons */}
@@ -64,7 +62,7 @@ export default function CTASection({
               onClick={handlePrimaryClick}
               className="bg-white text-purple-600 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-colors duration-200 text-lg min-w-[200px]"
             >
-              {t.cta.primaryButton}
+              Kontakt oss
             </button>
 
             {/* Secondary Button */}
@@ -72,7 +70,7 @@ export default function CTASection({
               onClick={handleSecondaryClick}
               className="bg-purple-600 text-white border-2 border-white px-8 py-4 rounded-full font-semibold hover:bg-purple-700 transition-colors duration-200 text-lg min-w-[200px]"
             >
-              {t.cta.secondaryButton}
+              Last ned vår guide
             </button>
           </div>
         </div>

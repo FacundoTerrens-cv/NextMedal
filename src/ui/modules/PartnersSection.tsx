@@ -2,7 +2,6 @@
 
 import moduleProps from '@/lib/moduleProps';
 import { Img } from '@/ui/Img';
-import { useTranslation } from '@/hooks/useTranslation';
 
 export default function PartnersSection({
   title,
@@ -18,8 +17,7 @@ export default function PartnersSection({
     logo: Sanity.Img;
     website?: string;
   }[];
-} & Sanity.Module) {
-  const { t, language } = useTranslation();
+} &   Sanity.Module) {
   
   return (
     <section className="py-24 bg-white dark:bg-[#1a1a2e]" {...moduleProps(props)}>
@@ -27,10 +25,10 @@ export default function PartnersSection({
         {/* Header Section */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-purple-600 dark:text-purple-400 mb-6 leading-tight">
-            {t.partners.title}
+            Våre partnere
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            {t.partners.subtitle}
+            Vi samarbeider med ledende bedrifter for å levere de beste løsningene
           </p>
         </div>
 
@@ -56,7 +54,7 @@ export default function PartnersSection({
                       {partner.name}
                     </div>
                     <div className="text-sm text-gray-500 dark:text-gray-500">
-                      {language === 'no' ? 'Logo ikke tilgjengelig' : 'Logo not available'}
+                      Logo ikke tilgjengelig
                     </div>
                   </div>
                 )}
@@ -68,10 +66,10 @@ export default function PartnersSection({
         {/* Call to Action */}
         <div className="text-center mt-16">
           <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
-            {t.partners.cta}
+            Interessert i å bli vår partner?
           </p>
           <button className="bg-purple-600 dark:bg-purple-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-purple-700 dark:hover:bg-purple-400 transition-colors duration-200">
-            {t.partners.contactButton}
+            Kontakt oss
           </button>
         </div>
       </div>

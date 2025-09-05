@@ -6,7 +6,6 @@ import { Img } from '@/ui/Img';
 import Pretitle from '@/ui/Pretitle';
 import { PortableText, stegaClean } from 'next-sanity';
 import Icon from '../Icon';
-import { useTranslation } from '@/hooks/useTranslation';
 
 interface FeatureItem {
   name: string;
@@ -37,7 +36,6 @@ export default function FeaturedHero({
   isTabbedModule = false,
   content,
 }: FeaturedHeroProps) {
-  const { t } = useTranslation();
   const isRightDirection = stegaClean(direction) === 'right';
   // Dynamically get Lucide icon component
   const getIconComponent = (icon: Sanity.Icon) => {
@@ -193,10 +191,10 @@ export default function FeaturedHero({
                 /* Default Tech Norway Hero Content */
                 <div className="hero">
                   <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-purple-600 dark:text-white font-serif leading-tight mb-6">
-                    {t.hero.title}
+                    Velkommen til Tech Norway
                   </h1>
                   <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 font-medium leading-relaxed">
-                    {t.hero.subtitle}
+                    Vi leverer innovative teknologiløsninger som forvandler din bedrift
                   </p>
                 </div>
               )}

@@ -7,6 +7,11 @@ export const maxDuration = 60; // sec
 
 export { metadata, viewport } from 'next-sanity/studio';
 
+// Exclude from static export
+export async function generateStaticParams() {
+  return [];
+}
+
 export default function StudioPage() {
   return <NextStudio config={config} />;
 }

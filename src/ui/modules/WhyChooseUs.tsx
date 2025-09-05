@@ -4,7 +4,6 @@ import { Card, CardContent } from '@/components/ui/card';
 import moduleProps from '@/lib/moduleProps';
 import { CheckCircle } from 'lucide-react';
 import TestimonialSlider from './TestimonialSlider';
-import { useTranslation } from '@/hooks/useTranslation';
 
 export default function WhyChooseUs({
   title,
@@ -34,7 +33,6 @@ export default function WhyChooseUs({
     position: string;
   }[];
 } & Sanity.Module) {
-  const { t, language } = useTranslation();
   return (
     <section className="py-24 bg-white dark:bg-[#1a1a2e]" {...moduleProps(props)}>
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -43,17 +41,30 @@ export default function WhyChooseUs({
           <div>
             {/* Título Principal */}
             <h2 className="text-4xl md:text-5xl font-bold text-purple-600 dark:text-purple-400 mb-6 leading-tight">
-              {t.whyChooseUs.title}
+              Hvorfor velge oss?
             </h2>
 
             {/* Descripción */}
             <p className="text-lg text-gray-700 dark:text-gray-300 mb-8 leading-relaxed">
-              {t.whyChooseUs.description}
+              Vi kombinerer teknologisk ekspertise med lokal forståelse for å levere løsninger som virker for norske bedrifter.
             </p>
 
             {/* Lista de Características */}
             <div className="space-y-6">
-              {t.whyChooseUs.features.map((feature, index) => (
+              {[
+                {
+                  title: "Lokal ekspertise",
+                  description: "Vi forstår det norske markedet og kan tilpasse løsninger til lokale behov"
+                },
+                {
+                  title: "Moderne teknologi",
+                  description: "Vi bruker de nyeste teknologiene for å levere fremtidsrettede løsninger"
+                },
+                {
+                  title: "Personlig service",
+                  description: "Hver klient får dedikert oppfølging og skreddersydde løsninger"
+                }
+              ].map((feature, index) => (
                 <div key={index} className="flex items-start gap-4">
                   <div className="flex-shrink-0 w-6 h-6 rounded-full bg-purple-100 dark:bg-purple-500/20 flex items-center justify-center">
                     <CheckCircle className="w-4 h-4 text-purple-600 dark:text-purple-400" />
@@ -77,7 +88,12 @@ export default function WhyChooseUs({
               <CardContent className="p-8">
                 {/* Sección de Estadísticas */}
                 <div className="grid grid-cols-2 gap-8 mb-8">
-                  {t.whyChooseUs.stats.map((stat, index) => (
+                  {[
+                    { number: "50+", label: "Prosjekter" },
+                    { number: "100%", label: "Tilfredshet" },
+                    { number: "24/7", label: "Support" },
+                    { number: "5+", label: "År erfaring" }
+                  ].map((stat, index) => (
                     <div key={index} className="text-center">
                       <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
                         {stat.number}
@@ -94,7 +110,22 @@ export default function WhyChooseUs({
 
                 {/* Sección de Testimonios con Slider */}
                 <TestimonialSlider 
-                  testimonials={t.whyChooseUs.testimonials}
+                  testimonials={[
+                    {
+                      _key: "testimonial-1",
+                      quote: "Tech Norway leverte en fantastisk løsning som har revolusjonert vår bedrift.",
+                      author: "Erik Hansen",
+                      position: "CEO, Innovate AS",
+                      rating: 5
+                    },
+                    {
+                      _key: "testimonial-2",
+                      quote: "Profesjonell service og utmerket teknisk kompetanse. Anbefales på det sterkeste!",
+                      author: "Maria Larsen",
+                      position: "CTO, Digital Solutions",
+                      rating: 5
+                    }
+                  ]}
                   autoPlay={true}
                   interval={6000}
                 />

@@ -6,7 +6,6 @@ import { cn } from '@/lib/utils';
 import Icon from '@/ui/Icon';
 import Pretitle from '@/ui/Pretitle';
 import { PortableText } from 'next-sanity';
-import { useTranslation } from '@/hooks/useTranslation';
 
 export default function FeatureGrid({
   pretitle,
@@ -24,14 +23,13 @@ export default function FeatureGrid({
   }[];
 }> &
   Sanity.Module) {
-  const { t } = useTranslation();
   return (
     <section className="py-24 bg-white dark:bg-[#1a1a2e]" {...moduleProps(props)}>
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {(pretitle || intro) && (
           <div className="text-center mb-20">
             {pretitle && <Pretitle className="mb-4">{pretitle}</Pretitle>}
-            {intro && (
+            {intro && Array.isArray(intro) && (
               <>
                 <div className="text-4xl md:text-5xl lg:text-6xl font-bold text-center text-gray-900 dark:text-white">
                   <PortableText value={[intro[0]]} />
@@ -56,10 +54,10 @@ export default function FeatureGrid({
               </div>
               <div className="flex-1">
                 <h3 className="text-lg font-bold text-purple-600 dark:text-purple-400 mb-2">
-                  {t.featureGrid.features.develop}
+                  Utvikling
                 </h3>
                 <div className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                  {t.featureGrid.features.developDesc}
+                  Vi utvikler skreddersydde løsninger som passer perfekt til dine behov
                 </div>
               </div>
             </div>
@@ -72,10 +70,10 @@ export default function FeatureGrid({
               </div>
               <div className="flex-1">
                 <h3 className="text-lg font-bold text-purple-600 dark:text-purple-400 mb-2">
-                  {t.featureGrid.features.market}
+                  Markedsføring
                 </h3>
                 <div className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                  {t.featureGrid.features.marketDesc}
+                  Vi hjelper deg å nå ut til riktig målgruppe med effektive markedsføringsstrategier
                 </div>
               </div>
             </div>
@@ -88,10 +86,10 @@ export default function FeatureGrid({
               </div>
               <div className="flex-1">
                 <h3 className="text-lg font-bold text-purple-600 dark:text-purple-400 mb-2">
-                  {t.featureGrid.features.internationalize}
+                  Internasjonalisering
                 </h3>
                 <div className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                  {t.featureGrid.features.internationalizeDesc}
+                  Vi hjelper deg å ekspandere til nye markeder med flerspråklige løsninger
                 </div>
               </div>
             </div>
@@ -104,10 +102,10 @@ export default function FeatureGrid({
               </div>
               <div className="flex-1">
                 <h3 className="text-lg font-bold text-purple-600 dark:text-purple-400 mb-2">
-                  {t.featureGrid.features.innovate}
+                  Innovasjon
                 </h3>
                 <div className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                  {t.featureGrid.features.innovateDesc}
+                  Vi bruker de nyeste teknologiene for å levere fremtidsrettede løsninger
                 </div>
               </div>
             </div>

@@ -8,20 +8,20 @@ export default defineType({
     defineField({
       name: 'pretitle',
       title: 'Pretitle',
-      type: 'translation',
+      type: 'string',
       description: 'Small text above the main title (e.g., "Our Services")',
     }),
     defineField({
       name: 'title',
       title: 'Title',
-      type: 'translation',
+      type: 'string',
       description: 'Main heading for the services section',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'subtitle',
       title: 'Subtitle',
-      type: 'translationText',
+      type: 'text',
       description: 'Description below the main title',
     }),
     defineField({
@@ -35,13 +35,13 @@ export default defineType({
             defineField({
               name: 'title',
               title: 'Service Title',
-              type: 'translation',
+              type: 'string',
               validation: (Rule) => Rule.required(),
             }),
             defineField({
               name: 'description',
               title: 'Service Description',
-              type: 'translationText',
+              type: 'text',
               validation: (Rule) => Rule.required(),
             }),
             defineField({
@@ -64,21 +64,19 @@ export default defineType({
               name: 'features',
               title: 'Features',
               type: 'array',
-              of: [{ type: 'translation' }],
+              of: [{ type: 'string' }],
               description: 'List of features for this service',
               validation: (Rule) => Rule.min(1).max(5),
             }),
           ],
           preview: {
             select: {
-              title: 'title.no',
-              titleEn: 'title.en',
+              title: 'title',
               media: 'image',
             },
-            prepare({ title, titleEn, media }) {
+            prepare({ title, media }) {
               return {
-                title: title || titleEn || 'Service',
-                subtitle: title && titleEn ? 'NO / EN' : title ? 'NO only' : titleEn ? 'EN only' : 'No translations',
+                title: title || 'Service',
                 media: media,
               };
             },
@@ -90,13 +88,12 @@ export default defineType({
   ],
   preview: {
     select: {
-      title: 'title.no',
-      titleEn: 'title.en',
+      title: 'title',
       services: 'services',
     },
-    prepare({ title, titleEn, services }) {
+    prepare({ title, services }) {
       return {
-        title: title || titleEn || 'Services Section',
+        title: title || 'Services Section',
         subtitle: services ? `${services.length} services` : 'No services',
       };
     },

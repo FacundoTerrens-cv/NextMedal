@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useTranslation } from '@/hooks/useTranslation';
 
 interface Testimonial {
   _key: string;
@@ -24,7 +23,6 @@ export default function TestimonialSlider({
   autoPlay = true, 
   interval = 5000 
 }: TestimonialSliderProps) {
-  const { language } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(autoPlay);
 
@@ -144,7 +142,7 @@ export default function TestimonialSlider({
       {/* Testimonial Counter */}
       {testimonials.length > 1 && (
         <div className="text-center text-sm text-gray-500 dark:text-gray-400 mt-2">
-          {currentIndex + 1} {language === 'no' ? 'av' : 'of'} {testimonials.length}
+          {currentIndex + 1} av {testimonials.length}
         </div>
       )}
     </div>

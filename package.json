@@ -43,7 +43,6 @@
     "@sanity/vision": "^4.6.0",
     "@tailwindcss/postcss": "^4.1.8",
     "class-variance-authority": "^0.7.1",
-    "classic": "@mux/mux-player/themes/classic",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
     "dompurify": "^3.2.6",

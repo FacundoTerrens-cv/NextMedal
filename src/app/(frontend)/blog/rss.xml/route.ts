@@ -5,6 +5,8 @@ import { escapeHTML, toHTML } from '@portabletext/to-html';
 import { Feed } from 'feed';
 import { groq } from 'next-sanity';
 
+export const dynamic = 'force-static';
+
 // Next.js Route Handler for RSS feed
 export async function GET() {
   try {

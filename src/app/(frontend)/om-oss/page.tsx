@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 import { getSite } from '@/sanity/lib/fetch';
-import { useTranslation } from '@/hooks/useTranslation';
 import { Users, Target, Award, Globe, Heart, Lightbulb, CheckCircle, Quote } from 'lucide-react';
 
 export const metadata: Metadata = {

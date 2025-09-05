@@ -45,7 +45,7 @@ export default function RichtextModule({
       )}
 
       <Content
-        value={content}
+        value={typeof content === 'string' ? content : content as any}
         className={cn(!tableOfContents && (stretch ? 'max-w-screen-lg' : 'max-w-screen-md'))}
       />
     </section>

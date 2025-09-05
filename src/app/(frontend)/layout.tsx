@@ -11,7 +11,6 @@ import Footer from '@/ui/footer';
 import Header from '@/ui/header';
 import { RootProvider } from 'fumadocs-ui/provider';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
-import { TranslationProvider } from '@/hooks/useTranslation';
 
 export default async function RootLayout({
   children,
@@ -37,8 +36,7 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <TranslationProvider>
-            <RootProvider>
+          <RootProvider>
               <ThemeColorSetter
                 lightTheme={themeSettings.lightMode}
                 darkTheme={themeSettings.darkMode}
@@ -58,7 +56,6 @@ export default async function RootLayout({
                 <VisualEditingControls />
               </NuqsAdapter>
             </RootProvider>
-          </TranslationProvider>
         </ThemeProvider>
       </body>
     </html>

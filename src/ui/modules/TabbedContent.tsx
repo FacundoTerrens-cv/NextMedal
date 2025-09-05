@@ -66,11 +66,11 @@ export default function TabbedContent({ content, pretitle, tabs, className }: Ta
 
           {tabs.map((tab) => (
             <TabsContent key={tab.title} value={tab.title} className="space-y-8">
-              {tab.content}
+              {typeof tab.content === 'string' ? tab.content : tab.content ? <PortableText value={tab.content as any} /> : null}
             </TabsContent>
           ))}
         </Tabs>
       </div>
     </section>
   );
-}
+} 

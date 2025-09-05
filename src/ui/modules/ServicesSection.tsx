@@ -6,7 +6,6 @@ import { cn } from '@/lib/utils';
 import { Img } from '@/ui/Img';
 import { PortableText } from 'next-sanity';
 import { CheckCircle } from 'lucide-react';
-import { useTranslation } from '@/hooks/useTranslation';
 
 export default function ServicesSection({
   pretitle,
@@ -27,21 +26,26 @@ export default function ServicesSection({
   }[];
 }> &
   Sanity.Module) {
-  const { t, language } = useTranslation();
   return (
     <section className="py-24 bg-white dark:bg-[#1a1a2e]" {...moduleProps(props)}>
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header Section */}
         <div className="text-center mb-20">
-          <div className="inline-block px-4 py-2 bg-purple-100 dark:bg-purple-500/20 text-purple-600 dark:text-purple-400 text-sm font-semibold uppercase tracking-wide rounded-full mb-6">
-            {t.services.pretitle}
-          </div>
-          <h2 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
-            {t.services.title}
-          </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            {t.services.subtitle}
-          </p>
+          {pretitle && (
+            <div className="inline-block px-4 py-2 bg-purple-100 dark:bg-purple-500/20 text-purple-600 dark:text-purple-400 text-sm font-semibold uppercase tracking-wide rounded-full mb-6">
+              {typeof pretitle === 'string' ? pretitle : (pretitle as any)?.no || (pretitle as any)?.en || 'Pretitle'}
+            </div>
+          )}
+          {title && (
+            <h2 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
+              {typeof title === 'string' ? title : (title as any)?.no || (title as any)?.en || 'Title'}
+            </h2>
+          )}
+          {subtitle && (
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              {typeof subtitle === 'string' ? subtitle : (subtitle as any)?.no || (subtitle as any)?.en || 'Subtitle'}
+            </p>
+          )}
         </div>
 
         {/* Services Grid */}
@@ -75,11 +79,11 @@ export default function ServicesSection({
                 </div>
                 
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-300">
-                  {service.title?.[language] || service.title?.no || service.title?.en || service.title}
+                  {typeof service.title === 'string' ? service.title : (service.title as any)?.no || (service.title as any)?.en || 'Service Title'}
                 </h3>
                 
                 <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed text-base">
-                  {service.description?.[language] || service.description?.no || service.description?.en || service.description}
+                  {typeof service.description === 'string' ? service.description : (service.description as any)?.no || (service.description as any)?.en || 'Service Description'}
                 </p>
 
                 {/* Features List */}
@@ -89,7 +93,7 @@ export default function ServicesSection({
                       <li key={featureIndex} className="flex items-start gap-3">
                         <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
                         <span className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                          {feature?.[language] || feature?.no || feature?.en || feature}
+                          {typeof feature === 'string' ? feature : (feature as any)?.no || (feature as any)?.en || 'Feature'}
                         </span>
                       </li>
                     ))}

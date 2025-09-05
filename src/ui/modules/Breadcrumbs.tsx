@@ -65,7 +65,7 @@ export default async function Breadcrumbs({
             className="line-clamp-1"
           >
             <BreadcrumbPage>
-              <span itemProp="name">{currentPage.title || currentPage.metadata?.title}</span>
+              <span itemProp="name">{currentPage.title || currentPage.metadata?.title || 'Page'}</span>
               <meta itemProp="position" content={((crumbs?.length || 0) + 1).toString()} />
             </BreadcrumbPage>
           </BreadcrumbItem>

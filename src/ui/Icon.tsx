@@ -44,7 +44,7 @@ export default function Icon({
         src={`https://ic0n.dev/${iconName}`}
         width={size}
         height={size}
-        alt={iconName}
+        alt={iconName || 'Icon'}
         loading="lazy"
         {...props}
       />

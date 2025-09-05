@@ -27,8 +27,6 @@ import linkList from './objects/link.list';
 import metadata from './objects/metadata';
 import moduleOptions from './objects/module-options';
 import stat from './objects/stat';
-import translation from './objects/translation';
-import translationText from './objects/translation-text';
 import logoObject from './objects/logo';
 
 // modules
@@ -83,8 +81,6 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   metadata,
   moduleOptions,
   stat,
-  translation,
-  translationText,
   logoObject,
   modules,
 

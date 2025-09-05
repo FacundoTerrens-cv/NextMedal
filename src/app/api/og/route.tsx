@@ -2,6 +2,8 @@ import { getSite } from '@/sanity/lib/fetch';
 import { ImageResponse } from 'next/og';
 import type { NextRequest } from 'next/server';
 
+export const dynamic = 'force-static';
+
 const domain = process.env.NEXT_PUBLIC_BASE_URL?.replace(/https?:\/\//, '');
 
 export async function GET(request: NextRequest) {
