@@ -34,23 +34,9 @@ jobs:
         NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
         SANITY_API_READ_TOKEN: ${{ secrets.SANITY_API_READ_TOKEN }}
     
-    - name: Stop Azure App Service
-      uses: azure/CLI@v1
-      with:
-        inlineScript: |
-          az webapp stop --name technologynorway-pwa --resource-group $(az webapp show --name technologynorway-pwa --query resourceGroup --output tsv)
-    
     - name: Deploy to Azure App Service
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'technologynorway-pwa'
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
         package: '.next/standalone'
-        deployment-method: 'zip'
-        enable-oryx-build: false
-    
-    - name: Start Azure App Service
-      uses: azure/CLI@v1
-      with:
-        inlineScript: |
-          az webapp start --name technologynorway-pwa --resource-group $(az webapp show --name technologynorway-pwa --query resourceGroup --output tsv)
