@@ -40,7 +40,7 @@ jobs:
     - name: Deploy to Azure App Service
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'technologynorway-pwa-v3'
+        app-name: 'technologynorway-pwa'
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
         package: '.next/standalone'
       continue-on-error: true
@@ -49,6 +49,6 @@ jobs:
       if: failure()
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'technologynorway-pwa-v3'
+        app-name: 'technologynorway-pwa'
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
         package: '.next/standalone'
